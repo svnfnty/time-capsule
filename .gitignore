@@ -1,0 +1,15 @@
+# Dependency directories
+node_modules/
+
+# Environment files
+.env
+
+# Build files
+build/
+
+# IDE files
+.vscode/
+.idea/
+
+# Truffle debug logs
+truffle-log.txt
