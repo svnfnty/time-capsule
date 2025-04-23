@@ -7,16 +7,20 @@ exports.createCapsule = async (req, res, next) => {
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
-    // Upload to IPFS
+    const { unlockDate } = req.body;
+    if (!unlockDate) {
+      return res.status(400).json({ error: 'Unlock date is required' });
+    }
+
+    const unlockTimestamp = new Date(unlockDate).getTime() / 1000;
+    if (isNaN(unlockTimestamp)) {
+      return res.status(400).json({ error: 'Invalid unlock date' });
+    }
+
     const ipfsHash = await ipfsService.uploadToIPFS(req.file.buffer);
-    
-    // Set unlock date to year 3000 (January 1, 3000 00:00:00 UTC)
-    const unlockTimestamp = new Date('3000-01-01T00:00:00Z').getTime() / 1000;
-    
-    // Create capsule on blockchain
     const accounts = await web3Service.getAccounts();
     const capsuleId = await web3Service.createCapsule(ipfsHash, unlockTimestamp, accounts[0]);
-    
+
     res.status(201).json({ 
       success: true, 
       capsuleId, 
