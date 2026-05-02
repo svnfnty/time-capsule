@@ -8,7 +8,7 @@ A decentralized time capsule system using Ethereum and IPFS.
 - IPFS-backed storage
 
 ## Setup
-1. Clone this repo
+1. Clone this repository 
 2. Run `npm install`
 3. Start Ganache: `ganache-cli`
 4. Deploy contracts: `truffle migrate`
