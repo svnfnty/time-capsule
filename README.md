@@ -1,4 +1,4 @@
-# Time Capsule Project y
+# Time Capsule Project
 
 A decentralized time capsule system using Ethereum and IPFS.
 
