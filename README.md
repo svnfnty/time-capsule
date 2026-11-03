@@ -70,13 +70,13 @@ flowchart TD
     end
 
     UI -->|HTTP Requests| API
-    UI -.->|Direct Web3 (Optional)| CONTRACT
+    UI -.->|Direct Web3| CONTRACT
     Curl -->|HTTP Requests| API
     API --> Multer
     Multer --> IPFS_SVC
     API --> WEB3_SVC
-    IPFS_SVC -->|Upload / Download CIDs| IPFS_NODE
-    WEB3_SVC -->|JSON-RPC Transactions / Calls| GANACHE
+    IPFS_SVC -->|Upload and Download CIDs| IPFS_NODE
+    WEB3_SVC -->|JSON-RPC Calls| GANACHE
     GANACHE --- CONTRACT
 ```
 
@@ -232,7 +232,7 @@ struct Capsule {
 | Function | Visibility | Description |
 |---|---|---|
 | `createCapsule(string memory _ipfsHash, uint256 _unlockTimestamp)` | `external` | Validates hash and future timestamp, computes `capsuleId`, persists capsule, and emits `CapsuleCreated`. |
-| `getCapsuleContent(bytes32 _capsuleId)` | `external view` | Returns `ipfsHash` if current timestamp $\ge$ `unlockTimestamp` or if `msg.sender == owner`. Reverts if locked. |
+| `getCapsuleContent(bytes32 _capsuleId)` | `external view` | Returns `ipfsHash` if current timestamp ≥ `unlockTimestamp` or if `msg.sender == owner`. Reverts if locked. |
 | `getMyCapsules()` | `external view` | Returns an array of `bytes32` capsule IDs owned by `msg.sender`. |
 | `isCapsuleUnlocked(bytes32 _capsuleId)` | `external view` | Returns `true` if `block.timestamp >= unlockTimestamp`, otherwise `false`. |
 
